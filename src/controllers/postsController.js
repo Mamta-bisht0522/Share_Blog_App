@@ -171,7 +171,7 @@ const deletedPost = async (req, res) => {
 
         if (!deletedPost) { return res.status(404).send({ status: false, message: "post is not found or Already Deleted!" }) }
 
-        return res.status(200).send({ status: true, message: "User Successfully Deleted" })
+        return res.status(200).send({ status: true, message: "post Successfully Deleted" })
 
     } catch (error) {
 
