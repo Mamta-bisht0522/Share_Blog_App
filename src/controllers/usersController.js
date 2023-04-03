@@ -28,11 +28,10 @@ const createUsersData = async (req, res) => {
 
         //------------------------ Checking the given Email or Mobile is already Present or Not ---------------//
 
-        const isDuplicateEmail = await userModel.find({ $or: [{ email: email }, { mobile: mobile }] })
-        if (isDuplicateEmail) {
-            if (isDuplicateEmail.email == email) { return res.status(400).send({ status: false, message: `Provided EmailId: ${email} is already exist!` }) }
-            if (isDuplicateEmail.mobile == mobile) { return res.status(400).send({ status: false, message: `Provied Mobile No.: ${mobile} is already exist!` }) }
-        }
+        const isDuplicateEmail = await userModel.findOne({ email: email, mobile: mobile })
+        if (isDuplicateEmail) return res.status(400).send({ status: false, message: `Provided EmailId  or Mobile is already exist!` })
+
+
 
         let userCreated = await userModel.create(data)
 
