@@ -26,15 +26,13 @@ const createUsersData = async (req, res) => {
 
         data.password = await bcrypt.hash(password, 10) //Encrepting the password using Bcrypt
 
-        //------------------------ Checking the given Email or Phone is already Present or Not ---------------//
+        //------------------------ Checking the given Email or Mobile is already Present or Not ---------------//
 
-        const isDuplicateEmail = await userModel.findOne({ $or: [{ email: email }, { mobile: mobile }] })
+        const isDuplicateEmail = await userModel.find({ $or: [{ email: email }, { mobile: mobile }] })
         if (isDuplicateEmail) {
             if (isDuplicateEmail.email == email) { return res.status(400).send({ status: false, message: `Provided EmailId: ${email} is already exist!` }) }
             if (isDuplicateEmail.mobile == mobile) { return res.status(400).send({ status: false, message: `Provied Mobile No.: ${mobile} is already exist!` }) }
         }
-
-
 
         let userCreated = await userModel.create(data)
 
