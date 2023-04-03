@@ -197,5 +197,4 @@ const deletedUser = async (req, res) => {
     }
 }
 
-
 module.exports = { createUsersData, userLogin, getUser, updateUserData, deletedUser }
